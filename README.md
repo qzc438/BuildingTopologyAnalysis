@@ -7,7 +7,7 @@
 <img src="https://github.com/qzc438/BuildingTopologyAnalysis/blob/master/Img/scatter-plot-group-colors.png" />
 
 ## Explanation for Degree and Diameter:
-test file can be found in x
+test file can be found in test.py
 <br/>
 <br/>
 <img src="https://github.com/qzc438/BuildingTopologyAnalysis/blob/master/Img/Topology%20Principle.png" />
