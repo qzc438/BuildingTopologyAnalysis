@@ -1,4 +1,5 @@
 # BuildingTopologyAnalysis
+## This analysis use diffent Brick and Haystack models.
 ## Degree and Diameter
 <br/>
 <br/>
