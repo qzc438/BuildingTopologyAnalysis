@@ -1,6 +1,7 @@
 # BuildingTopologyAnalysis
 ## This analysis uses different Brick and Haystack models.
-## The result is clustering.
+## The result is clustering:
+## However, more data model can make it more solid, like this:
 ## Explanation for Degree and Diameter:
 test file can be found in x
 <br/>
