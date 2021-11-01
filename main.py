@@ -16,10 +16,14 @@ def mean(numbers):
     return float(sum(numbers)) / max(len(numbers), 1)
 
 brick_model_names = []
+brick_number_of_nodes = []
+brick_number_of_edges = []
 brick_mean_degrees = []
 brick_mean_diameters = []
 
 haystack_model_names = []
+haystack_number_of_nodes = []
+haystack_number_of_edges = []
 haystack_mean_degrees = []
 haystack_mean_diameters = []
 
@@ -34,6 +38,7 @@ for folders in files:
                 print("============")
                 print(file)
                 print()
+
                 brick_model_names.append(file)
 
                 print("LOAD ADN TRANSFER")
@@ -51,6 +56,9 @@ for folders in files:
                 print("============")
                 print("The network has {} nodes and {} edges".format(G.number_of_nodes(), G.number_of_edges()))
                 print()
+
+                brick_number_of_nodes.append(G.number_of_nodes())
+                brick_number_of_edges.append(G.number_of_edges())
 
                 # degree refers to number of properties
                 print("DEGREE")
@@ -70,10 +78,10 @@ for folders in files:
                 diameters = []
                 for c in components:
                     diameters.append(nx.diameter(c))
-                print("The network diameter is {}".format("%.2f" % mean(diameters)))
+                print("The network diameter is {}".format("%.2f" % max(diameters)))
                 print()
 
-                brick_mean_diameters.append(mean(diameters))
+                brick_mean_diameters.append(max(diameters))
 
     if os.path.isdir(folders) and folders == "Haystack":
         for file in os.listdir(path+"/"+folders+"/"):
@@ -101,6 +109,9 @@ for folders in files:
                 print("The network has {} nodes and {} edges".format(G.number_of_nodes(), G.number_of_edges()))
                 print()
 
+                haystack_number_of_nodes.append(G.number_of_nodes())
+                haystack_number_of_edges.append(G.number_of_edges())
+
                 # degree refers to number of properties
                 print("DEGREE")
                 print("============")
@@ -119,15 +130,15 @@ for folders in files:
                 diameters = []
                 for c in components:
                     diameters.append(nx.diameter(c))
-                print("The network diameter is {}".format("%.2f" % mean(diameters)))
+                print("The network diameter is {}".format("%.2f" % max(diameters)))
                 print()
 
-                haystack_mean_diameters.append(mean(diameters))
+                haystack_mean_diameters.append(max(diameters))
 
-info = {'MODEL': brick_model_names, 'DEGREE': brick_mean_degrees, 'DIAMETER': brick_mean_diameters}
+info = {'MODEL': brick_model_names, 'NODE': brick_number_of_nodes, 'EDGE': brick_number_of_edges, 'DEGREE': brick_mean_degrees, 'DIAMETER': brick_mean_diameters}
 print(tabulate(info, headers='keys', tablefmt='fancy_grid', missingval='N/A', showindex=True))
 
-info = {'MODEL': haystack_model_names, 'DEGREE': haystack_mean_degrees, 'DIAMETER': haystack_mean_diameters}
+info = {'MODEL': haystack_model_names, 'NODE': haystack_number_of_nodes, 'EDGE': haystack_number_of_edges, 'DEGREE': haystack_mean_degrees, 'DIAMETER': haystack_mean_diameters}
 print(tabulate(info, headers='keys', tablefmt='fancy_grid', missingval='N/A', showindex=True))
 
 plt.figure(figsize=(10,5))
