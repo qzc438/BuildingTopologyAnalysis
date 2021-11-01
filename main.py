@@ -19,13 +19,13 @@ brick_model_names = []
 brick_number_of_nodes = []
 brick_number_of_edges = []
 brick_mean_degrees = []
-brick_mean_diameters = []
+brick_max_diameters = []
 
 haystack_model_names = []
 haystack_number_of_nodes = []
 haystack_number_of_edges = []
 haystack_mean_degrees = []
-haystack_mean_diameters = []
+haystack_max_diameters = []
 
 path = "."
 files = os.listdir(path)
@@ -81,7 +81,7 @@ for folders in files:
                 print("The network diameter is {}".format("%.2f" % max(diameters)))
                 print()
 
-                brick_mean_diameters.append(max(diameters))
+                brick_max_diameters.append(max(diameters))
 
     if os.path.isdir(folders) and folders == "Haystack":
         for file in os.listdir(path+"/"+folders+"/"):
@@ -133,19 +133,19 @@ for folders in files:
                 print("The network diameter is {}".format("%.2f" % max(diameters)))
                 print()
 
-                haystack_mean_diameters.append(max(diameters))
+                haystack_max_diameters.append(max(diameters))
 
-info = {'MODEL': brick_model_names, 'NODE': brick_number_of_nodes, 'EDGE': brick_number_of_edges, 'DEGREE': brick_mean_degrees, 'DIAMETER': brick_mean_diameters}
+info = {'MODEL': brick_model_names, 'NODE': brick_number_of_nodes, 'EDGE': brick_number_of_edges, 'DEGREE': brick_mean_degrees, 'DIAMETER': brick_max_diameters}
 print(tabulate(info, headers='keys', tablefmt='fancy_grid', missingval='N/A', showindex=True))
 
-info = {'MODEL': haystack_model_names, 'NODE': haystack_number_of_nodes, 'EDGE': haystack_number_of_edges, 'DEGREE': haystack_mean_degrees, 'DIAMETER': haystack_mean_diameters}
+info = {'MODEL': haystack_model_names, 'NODE': haystack_number_of_nodes, 'EDGE': haystack_number_of_edges, 'DEGREE': haystack_mean_degrees, 'DIAMETER': haystack_max_diameters}
 print(tabulate(info, headers='keys', tablefmt='fancy_grid', missingval='N/A', showindex=True))
 
 plt.figure(figsize=(10,5))
 plt.title('Topology Analysis',fontsize=20)
 plt.xlabel('properties',fontsize=14)
 plt.ylabel('hierarchy',fontsize=14)
-plt.scatter(brick_mean_degrees, brick_mean_diameters, s=100, c='deeppink', marker='o')
-plt.scatter(haystack_mean_degrees, haystack_mean_diameters, s=100, c='darkblue', marker='+')
+plt.scatter(brick_mean_degrees, brick_max_diameters, s=100, c='deeppink', marker='o')
+plt.scatter(haystack_mean_degrees, haystack_max_diameters, s=100, c='darkblue', marker='+')
 plt.legend(['Brick Model', 'Project Haystack Model'])
 plt.show()
